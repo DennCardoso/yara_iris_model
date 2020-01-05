@@ -13,36 +13,29 @@ Material(app)
 def index():
     return render_template("index.hmtl")
 
-@app.route('/preview')
-def preview():
-    df = pd.read_csv("data/iris.csv")
-    return render_template("preview.html", df_view= df)
-
-@app.route('/', methods=['POST'])
+@app.route('/postjson', methods=['POST'])
 def analyze():
-    if request.method == 'POST':
-        petal_length = request.form['petal_length']
-        sepal_length = request.form['sepal_length']
-        petal_width = request.form['petal_width']
-        sepal_width = request.form['sepal_width']
+    print(request.is_json)
+    content = request.get_json()
+    sepal_length = content['sepal_length']
+    sepal_width = content['sepal_width']
+    petal_length = content['petal_length']
+    petal_width = content['petal_width']
+    
+    #Clean the data by convert from unicode to float
+    sample_data = [sepal_length, sepal_width, petal_length, petal_width]
+    clean_data = [float(i) for i in sample_data]
+    
+    # reshape the data as a Sample not Individual Features
+    ex1 = np.array(clean_data).reshape(1,-1)
+    
+    #reload de model
+    logit_model = joblib.load('data/model.pkl')
+    result_prediction = logit_model.predict(ex1)
+    
+    result = result_prediction[0]
 
-        #Clean the data by convert from unicode to float
-        sample_data = [sepal_length, sepal_width, petal_length, petal_width]
-        clean_data = [float(i) for i in sample_data]
-
-        # reshape the data as a Sample not Individual Features
-        ex1 = np.array(clean_data).reshape(1,-1)
-
-        #reload de model
-        logit_model = joblib.load('data/model.pkl')
-        result_prediction = logit_model.predict(ex1)
-
-        return render_template('index_html', petal_width=petal_width,
-		sepal_width=sepal_width,
-		sepal_length=sepal_length,
-		petal_length=petal_length,
-        result_prediction=result_prediction)
-
+    return result
 
 if __name__ == '__main__':
     app.run(debug=True)
