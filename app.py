@@ -11,7 +11,7 @@ Material(app)
 
 @app.route('/')
 def index():
-    return render_template("index.hmtl")
+    return render_template('index.hmtl')
 
 @app.route('/postjson', methods=['POST'])
 def analyze():
