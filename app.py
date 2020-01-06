@@ -21,7 +21,7 @@ def preview():
 @app.route('/training', methods=['GET'])
 def training_model():
     reg.logisticRegModel()
-    return 'Training model and create Pkl File'
+    return 'Training Finished - Create pkl File'
 
 @app.route('/predict', methods=['POST'])
 def analyze():
@@ -43,7 +43,7 @@ def analyze():
     logit_model = joblib.load('data/model.pkl')
     result_prediction = logit_model.predict(ex1)
     
-    result = result_prediction[0]
+    result = 'the IRIS for this vector is: '+ result_prediction[0]
 
     return result
 

@@ -1,19 +1,20 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# Import dependencies
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np 
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.externals import joblib
+import pickle
+
+
 class logisticRegModel:
     def __init__(self):
-        # Import dependencies
-        import matplotlib.pyplot as plt
-        import seaborn as sns
-        import numpy as np 
-        from sklearn.linear_model import LogisticRegression
-        from sklearn.metrics import classification_report
-        from sklearn.metrics import accuracy_score
-        from sklearn.model_selection import train_test_split
-        from sklearn.externals import joblib
-        import pickle
-
         # Load de dataset 
         self.data = sns.load_dataset('iris')
 
