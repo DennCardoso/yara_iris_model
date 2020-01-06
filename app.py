@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request
 from flask_material import Material 
+import regression as reg
 
 import pandas as pd 
 import numpy as np 
@@ -11,13 +12,18 @@ Material(app)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template('index.html')
 
 @app.route('/preview')
 def preview():
-    return render_template("preview.html")
+    return render_template('preview.html')
 
-@app.route('/postjson', methods=['POST'])
+@app.route('/training', methods=['GET'])
+def training_model():
+    reg.logisticRegModel()
+    return 'Training model and create Pkl File'
+
+@app.route('/predict', methods=['POST'])
 def analyze():
     print(request.is_json)
     content = request.get_json()

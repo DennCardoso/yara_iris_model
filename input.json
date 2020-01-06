@@ -1,4 +1,7 @@
 [
     {"sepal_length": 3,  "sepal_width": 0,  "petal_length": 2, "petal_width": 2.3},
     {"sepal_length": 5.1, "sepal_width":3.5,   "petal_length": 1.4, "petal_width": 0.2}
+    {"sepal_length": 5.1, "sepal_width":3.5,   "petal_length": 1.4, "petal_width": 0.2}
+    {"sepal_length": 6.7, "sepal_width":3.3,   "petal_length": 5.7, "petal_width": 2.5}
+    {"sepal_length": 6.7, "sepal_width":3.0,   "petal_length": 5.2, "petal_width": 2.3}
 ]
